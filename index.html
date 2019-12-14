@@ -136,14 +136,15 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/14/%E5%92%A9/">
-        <p class="h4 index-header">咩</p>
+      <a href="/2019/12/14/%E7%BB%88%E4%BA%8E%E6%90%AD%E5%A5%BD%E4%BA%86%E5%8D%9A%E5%AE%A2/">
+        <p class="h4 index-header">终于搭好了博客</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">终于。。部署到阿里云上了
+          <div class="index-text mb-1">终于。。部署到阿里云和Github上了
+部署到阿里云服务器的时候，坑的要死
 虽然想就手写一篇教程
 但我已经不记得我输入过什么命令了
 ……
@@ -156,45 +157,6 @@
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-14&nbsp;&nbsp;
         
         
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/14/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/">
-        <p class="h4 index-header">测试文章</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">测试文章
-可是人家
-</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-14&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/Diary">Diary</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/PS3">PS3</a>&nbsp;
-          
-            <a href="/tags/Games">Games</a>&nbsp;
-          
         
       </div>
     </div>
@@ -365,26 +327,19 @@ More info: Deployment
 
   <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
   <script>
-  var typed;
-    $.ajax({
-      type: "get",
-      url: "https://v1.hitokoto.cn/?c=a&encode=text",
-      success: function (response) {
-        typed = new Typed('#subtitle', {
-          strings: [
-            '  ',
-            response,
-          ],
-          cursorChar: "_",
-          typeSpeed: 70,
-          loop: false,
-        });
-        typed.stop();
-        $(document).ready(function () {
-          $(".typed-cursor").addClass("h2");
-          typed.start();
-        });
-      }
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
     });
   </script>
 
