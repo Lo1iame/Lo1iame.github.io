@@ -559,7 +559,9 @@ body a:hover {
 .text-center.py-3 i {
   visibility: hidden;
 }
+.img-fluid.rounded.z-depth-3.index-thumbnails {
+  transition: transform 0.2s;
+}
 .img-fluid.rounded.z-depth-3.index-thumbnails:hover {
   transform: scale(1.02);
-  transition: transform 0.2s;
 }
