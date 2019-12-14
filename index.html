@@ -13,7 +13,7 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content="">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Loriame">
   <meta name="keywords" content="">
   <title>Loriame的博客</title>
 
@@ -98,7 +98,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/bg.jpg')no-repeat center center;
+         style="background: url('/img/banner_home.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -336,20 +336,28 @@ More info: Deployment
 
   <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "只为纯粹的热爱&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
+    var typed;
+    $.ajax({
+      type: "get",
+      url: "https://v1.hitokoto.cn/?c=a&encode=text",
+      success: function (response) {
+        typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            response,
+          ],
+          cursorChar: "_",
+          typeSpeed: 70,
+          loop: false,
+        });
+        typed.stop();
+        $(document).ready(function () {
+          $(".typed-cursor").addClass("h2");
+          typed.start();
+        });
+      }
     });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
+    
   </script>
 
 
