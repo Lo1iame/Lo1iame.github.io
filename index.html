@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.jpg">
+  <link rel="icon" type="image/png" href="/img/favicon.jpg">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -337,26 +337,26 @@ More info: Deployment
   <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
   <script>
     var typed;
-      $.ajax({
-        type: "get",
-        url: "https://v1.hitokoto.cn/?c=a&encode=text",
-        success: function (response) {
-          typed = new Typed('#subtitle', {
-            strings: [
-              '  ',
-              response,
-            ],
-            cursorChar: "_",
-            typeSpeed: 70,
-            loop: false,
-          });
-          typed.stop();
-          $(document).ready(function () {
-            $(".typed-cursor").addClass("h2");
-            typed.start();
-          });
-        }
-      });
+    $.ajax({
+      type: "get",
+      url: "https://v1.hitokoto.cn/?c=a&encode=text",
+      success: function (response) {
+        typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            response,
+          ],
+          cursorChar: "_",
+          typeSpeed: 70,
+          loop: false,
+        });
+        typed.stop();
+        $(document).ready(function () {
+          $(".typed-cursor").addClass("h2");
+          typed.start();
+        });
+      }
+    });
   </script>
 
 
