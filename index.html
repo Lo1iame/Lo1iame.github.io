@@ -338,19 +338,26 @@ More info: Deployment
 
   <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
+	  var typed;
+    $.ajax({
+      type: "get",
+      url: "https://v1.hitokoto.cn/?c=a&encode=text",
+      success: function (response) {
+        typed = new Typed('#subtitle', {
+          strings: [
+            '  ',
+            response,
+          ],
+          cursorChar: "_",
+          typeSpeed: 70,
+          loop: false,
+        });
+        typed.stop();
+        $(document).ready(function () {
+          $(".typed-cursor").addClass("h2");
+          typed.start();
+        });
+      }
     });
   </script>
 
