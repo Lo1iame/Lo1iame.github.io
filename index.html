@@ -135,57 +135,50 @@
   <div class="row mb-4 mx-auto">
     
     
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/02/15/%E5%8F%AF%E6%98%AF%E4%BA%BA%E5%AE%B6/">
-        <p class="h4 index-header">可是人家</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1"></div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-15&nbsp;&nbsp;
-        
-        
-        
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/07/06/other/ChatAI/" target="_self">
+          <img src="/img/article/heart.jpeg" srcset="/img/loading.gif" alt="酷Q SDK-X + Python + Flask 开发聊天机器人" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
       </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2020/02/15/hello-world/">
-        <p class="h4 index-header">Hello World</p>
+      <a href="/2020/07/06/other/ChatAI/">
+        <p class="h4 index-header">酷Q SDK-X + Python + Flask 开发聊天机器人</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-More info: Writing
-Run server$ hexo server
-More info: Server
-Generate static files$ hexo generate
-More info: Generating
-Deploy to remote sites$ hexo deploy
-More info: Deployment
-</div>
+          <div class="index-text mb-1">前言最近加了一个碧蓝航线的游戏群，看到群里有个聊天机器人，你每天都可以艾特它抽卡，和它说你要抽哪个池子它就会随机给你发一个抽卡结果的图片，于是一个死宅程序员的本能就觉醒了，这玩意是怎么做的呢？
+于是我去网上调研了一些技术，幻想着是不是可以用一个Web API就能往QQ群推送消息，结果居然没有 (废话) ，但至少发现了一个叫酷Q的软件，它经常使用易语言去编写聊天插件，有比较成熟的社区，对图灵机器人有比较好的支持，所以我决定用编写酷Q的插件的方式来完成我对机器人老婆的需求
+那就开始吧虽然说了要做一个酷Q的插件，但我并不想写易语言，酷Q支持使用python开发，本篇文章就使用python实现
+为了不让本篇文章频繁出现机器人的字眼，使得阅读更富有人情，我们在下文将其称呼为心酱
+哈恰玛恰玛~（心豚叫声）
+我们这个应用程序的思路是这样的：
+
+使用心酱的账号登录酷Q，把她加为好友，或让她潜伏在群里
+
+酷Q插件运行中会监听私聊和群消息等，根据不同的消息和事件触发不同的处理逻辑
+
+让某些特定的命令去调用服务端API获取需要回复的内容，再通过酷Q的API推送到群里
+
+
+第一步：安装酷Q SDK-X酷Q常用</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-15&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-07-06&nbsp;&nbsp;
         
         
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E9%85%B7Q">酷Q</a>&nbsp;
+          
+            <a href="/tags/python">python</a>&nbsp;
+          
         
       </div>
     </div>
@@ -195,13 +188,13 @@ More info: Deployment
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/12/14/%E7%BB%88%E4%BA%8E%E6%90%AD%E5%A5%BD%E4%BA%86%E5%8D%9A%E5%AE%A2/" target="_self">
+        <a href="/2019/12/14/other/%E7%BB%88%E4%BA%8E%E6%90%AD%E5%A5%BD%E4%BA%86%E5%8D%9A%E5%AE%A2/" target="_self">
           <img src="/img/banner_about.jpg" srcset="/img/loading.gif" alt="终于搭好了博客" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/14/%E7%BB%88%E4%BA%8E%E6%90%AD%E5%A5%BD%E4%BA%86%E5%8D%9A%E5%AE%A2/">
+      <a href="/2019/12/14/other/%E7%BB%88%E4%BA%8E%E6%90%AD%E5%A5%BD%E4%BA%86%E5%8D%9A%E5%AE%A2/">
         <p class="h4 index-header">终于搭好了博客</p>
         
         
