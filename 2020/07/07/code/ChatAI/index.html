@@ -98,7 +98,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/article/heart.jpeg')no-repeat center center;
+         style="background: url('/img/article/seele.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -113,7 +113,7 @@
               
                 <p class="mt-3">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
-                  星期一, 七月 6日 2020, 4:51 下午
+                  星期二, 七月 7日 2020, 1:51 凌晨
                 </p>
               
 
@@ -232,7 +232,7 @@ class MainHandler(cqplus.CQPlusHandler):
 <p>向群里或者向某个QQ号发送消息，以及获取群成员列表，撤销、禁言、分享内容等操作都可以使用<code>cqplus.CQPlusHandler</code>的api来实现</p>
 <p>更多的api指令可以转到<code>cqplus.CQPlusHandler</code>的定义在源码中查看</p>
 <p>更多的CQ码查阅该文档：<a href="https://docs.cqp.im/manual/cqcode/" target="_blank" rel="noopener">酷Q文库</a></p>
-<h4 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h4><p>下面的定时器事件中，<code>name</code>参数来自于<code>settings.json</code>，这里一定不要被教程坑了，教程中让你设置了两个计时器</p>
+<h4 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h4><p>上面的定时器事件中，<code>name</code>参数来自于<code>settings.json</code>，这里一定不要被教程坑了，教程中让你设置了两个计时器</p>
 <h5 id="settings-json"><a href="#settings-json" class="headerlink" title="settings.json"></a>settings.json</h5><pre><code class="json">{
     &quot;DEBUG&quot;: true,
     &quot;TIMER&quot;: {
@@ -250,7 +250,10 @@ class MainHandler(cqplus.CQPlusHandler):
     &quot;RUNTIME_NAME&quot;: &quot;Python37&quot;
 }</code></pre>
 <p>本例中使用了一个推送计时器，每5分钟检查一下当前所在的时间，并在某些特定时间内向群里推送消息。</p>
-<p><em>酷Q社区并不提倡自动推送功能，不仅程序容易崩溃，而且会容易被用来制造广告和诈骗信息，请各位开发者自觉遵守法律法规，禁止使用此软件从事网络违法犯罪行为</em></p>
+<p class="note note-danger">
+酷Q社区并不提倡自动推送功能，不仅程序容易崩溃，而且会容易被用来制造广告和诈骗信息，请各位开发者自觉遵守法律法规，禁止使用此软件从事网络违法犯罪行为
+</p>
+
 <h3 id="第四步：接入图灵机器人"><a href="#第四步：接入图灵机器人" class="headerlink" title="第四步：接入图灵机器人"></a>第四步：接入图灵机器人</h3><p>我们现在可以处理消息并返回内容了，但内容如果全部写死就没有意义了，无论如何，得让心酱能先和我们对话才行</p>
 <p>我们可以选择接入图灵机器人的API，实现对话功能</p>
 <p><a href="http://www.turingapi.com" target="_blank" rel="noopener">图灵机器人官网</a></p>
@@ -495,7 +498,7 @@ def setBiliBiliOpen(group, state):
     res = requests.get(BASE_API + &#39;/setBiliBiliOpen/&#39; + str(group) + &#39;/&#39; + str(state))
     result = res.json()
     return result</code></pre>
-<h5 id="HeartUitl-py"><a href="#HeartUitl-py" class="headerlink" title="HeartUitl.py"></a>HeartUitl.py</h5><pre><code class="python">import api
+<h5 id="HeartUitl-py"><a href="#HeartUitl-py" class="headerlink" title="HeartUitl.py"></a>HeartUitl.py</h5><pre><code class="python">import Api
 
 def getBiliBiliUp(group, aid):
     res = Api.getUpInfo(group, aid)
@@ -592,7 +595,7 @@ def setBiliBiliOpen(group, state):
     return &#39;设置成功&#39;</code></pre>
 <h5 id="CQPlusHandler-py-2"><a href="#CQPlusHandler-py-2" class="headerlink" title="CQPlusHandler.py"></a>CQPlusHandler.py</h5><pre><code class="python"># -*- coding:utf-8 -*-
 import cqplus
-import api
+import Api
 import HeartUtil
 
 # 心酱的QQ号
@@ -639,6 +642,8 @@ class MainHandler(cqplus.CQPlusHandler):
 <p><img src="https://ypcdn.105577.xyz/aa8e866888da0c33a5bcfdb81f5e8d6d.png" srcset="/img/loading.gif" alt="alt 设置"></p>
 <p><img src="https://ypcdn.105577.xyz/93d6ccde9b473f58ca12377a9433acfe.png" srcset="/img/loading.gif" alt="alt B站推送"></p>
 <p>本例中未讲到如何设置每日21:00自动推送，这部分内容实现并不困难，可以自行思考或者询问博主，祝大家都有自己的聊天机器人<span style="color: #000;background-color: #000">老婆</span></p>
+<p><br/><br/><br/><br/><br/></p>
+<p><img src="https://ypcdn.105577.xyz/2e039745ab504346c2fd7f4122847050.jpeg" srcset="/img/loading.gif" alt="alt 赤井心"></p>
 
             <hr>
           </div>
