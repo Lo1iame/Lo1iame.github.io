@@ -16,7 +16,7 @@
   <meta name="author" content="Loriame">
   <meta name="keywords" content="">
   <meta name="baidu-site-verification" content="AsjGHeZriJ" />
-  <title>关于 ~ Loriame的博客</title>
+  <title>Vue 消息总线(Bus)功能的实现 ~ Loriame的博客</title>
 
   <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css"  >
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -99,7 +99,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/banner_about.jpg')no-repeat center center;
+         style="background: url('/img/banner_post.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -109,6 +109,35 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 七月 13日 2020, 12:05 中午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    465 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -120,63 +149,150 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-            <div class="about-avatar">
-              <img src="/img/avatar.jpg"
-                   class="img-fluid z-depth-1 rounded-circle"
-                   alt="avatar">
-            </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h3 id="组件传值"><a href="#组件传值" class="headerlink" title="组件传值"></a>组件传值</h3><p>Vue开发中，我们经常遇到需要组件间传值的情景</p>
+<h4 id="父组件传给子组件"><a href="#父组件传给子组件" class="headerlink" title="父组件传给子组件"></a>父组件传给子组件</h4><p>在传统的实现方式中，父组件传递给子组件使用<code>Prop</code></p>
+<pre><code class="vue">&lt;!-- 父组件 --&gt;
+
+&lt;child msg=&quot;来自父组件的值&quot;&gt;&lt;/child&gt;</code></pre>
+<pre><code class="js">// 子组件
+props: {
+    msg: String,
+}
+
+// TypeScript
+@prop() msg: string</code></pre>
+<h4 id="子组件传给父组件"><a href="#子组件传给父组件" class="headerlink" title="子组件传给父组件"></a>子组件传给父组件</h4><p>子组件传递给父组件使用<code>emit</code></p>
+<pre><code class="vue">&lt;!-- 父组件 --&gt;
+
+&lt;!-- 监听子组件的sendMsg事件 --&gt;
+&lt;child @sendMsg=&quot;getMsg&quot;&gt;&lt;/child&gt;</code></pre>
+<pre><code class="js">// 父组件
+
+// 响应事件函数
+getMsg(msg) {
+    console.log(msg)
+}</code></pre>
+<pre><code class="js">// 子组件
+
+this.$emit(&#39;sendMsg&#39;, &#39;传给父组件的消息&#39;)</code></pre>
+<h3 id="消息总线"><a href="#消息总线" class="headerlink" title="消息总线"></a>消息总线</h3><p>如果我们遇到兄弟组件，或者沾不上什么亲的随便两个组件需要互相响应，可以通过 <strong>消息总线(Bus)</strong> 来实现。</p>
+<h4 id="消息总线的原理"><a href="#消息总线的原理" class="headerlink" title="消息总线的原理"></a>消息总线的原理</h4><p>Vue实例中有<code>$on()</code>和<code>$emit()</code>方法，我们可以用一个新的Vue实例作为消息总线，让它集中管理消息的发送和接收响应。</p>
+<h4 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h4><p>TypeScript</p>
+<pre><code class="ts">// Bus.ts
+
+import Vue from &#39;vue&#39;;
+
+/**
+ * @class 消息总线
+ */
+export class Bus {
+
+    // 消息处理者
+    private handler = new Vue;
+
+    /** 
+     * @description 传出消息
+     * @param event 消息文本
+     * @param preload 载荷
+     */
+    $emit(event: string, preload?: any): void {
+        this.handler.$emit(event, preload);
+    }
+
+    /** 
+     * @description 响应消息
+     * @param event 消息文本
+     * @param handle 响应消息回调函数
+     */
+    $on(event: string, handle: Function): void{
+        this.handler.$off(event);   // 先解绑原有的事件，防止多次执行回调
+        this.handler.$on(event, handle);
+    }
+}
+</code></pre>
+<p>JavaScript 按此逻辑封装即可</p>
+<p>Bus类有一个处理器<code>handler</code>，是一个新的Vue实例，同时有两个方法<code>$on()</code>和<code>$emit()</code>，负责响应消息和传出消息</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><pre><code class="ts">// main.ts
+
+import { Bus } from &#39;./bus/Bus&#39;;
+Vue.prototype.$bus = new Bus;</code></pre>
+<pre><code class="ts">// 组件A
+this.$bus.$emit(&#39;event name&#39;, &#39;消息内容&#39;);</code></pre>
+<pre><code class="ts">// 组件B
+this.$bus.$on(&#39;event name&#39;, (msg)=&gt; {
+    console.log(msg); // 消息内容
+})</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
                 
-
-<div class="text-center">
-  <p class="h3">Loriame</p>
-  <p>程序猿 / 前端 / 炼铜术士</p>
-  
-    
-    
-    <a href="https://github.com/Lo1iame"
-       class="h4 ">
-      <i class="fab fa-github" aria-hidden="true"></i>
-      
-    </a>
-    &nbsp;&nbsp;
-  
-    
-    
-    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1007574921&website=www.oicqzone.com"
-       class="h4 ">
-      <i class="fab fa-qq" aria-hidden="true"></i>
-      
-    </a>
-    &nbsp;&nbsp;
-  
-    
-    
-</div>
-<div class="mt-5 markdown-body">
-  <p>友情链接</p>
-<!-- 毕海天 -->
-<p><a href="http://apinchoftnt.xyz/" target="_blank" rel="noopener">TNT</a></p>
-<!-- 曹恽 -->
-<p><a href="http://47.104.233.57/" target="_blank" rel="noopener">shangxiaohun</a></p>
-<!-- 王振松 -->
-<p><a href="http://39.107.243.5/" target="_blank" rel="noopener">xwtxbzz</a></p>
-<!-- 李璟琰 -->
-<p><a href="http://bo.bigbaozi.club/" target="_blank" rel="noopener">dabaozi</a></p>
-
-</div>
-
-              </div>
-            </div>
+                  <a class="hover-with-bg" href="/tags/Vue">Vue</a>
+                
+                  <a class="hover-with-bg" href="/tags/TypeScript">TypeScript</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <script defer src="https://utteranc.es/client.js"
+          repo="Lo1iame/Lo1iame.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+  </script>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -256,6 +372,11 @@
 
 
 
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
@@ -307,7 +428,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "关于&nbsp;",
+        "Vue 消息总线(Bus)功能的实现&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
